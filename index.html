@@ -22,7 +22,6 @@
             <p class="text-indigo-700 mt-2 chinese-text">自我关怀工具箱</p>
         </header>
 
-        <!-- Home Screen -->
         <div id="home-screen" class="grid grid-cols-1 gap-4">
             <button class="home-button bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl p-6 shadow-lg flex flex-col items-center justify-center" data-section="affirmations">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -57,7 +56,6 @@
             </button>
         </div>
 
-        <!-- Affirmations Section -->
         <div id="affirmations-section" class="section hidden">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold text-indigo-900">Affirmations</h2>
@@ -106,7 +104,6 @@
             </div>
         </div>
 
-        <!-- Control Section -->
         <div id="control-section" class="section hidden">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold text-green-800">What's in My Control</h2>
@@ -125,7 +122,6 @@
                 <p class="text-gray-500 mb-4">Identify what you can and cannot control</p>
                 
                 <div class="grid grid-cols-1 gap-6">
-                    <!-- In My Control Column -->
                     <div>
                         <h4 class="flex items-center text-lg font-semibold text-green-700 mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -150,7 +146,6 @@
                         </div>
                     </div>
                     
-                    <!-- Not In My Control Column -->
                     <div>
                         <h4 class="flex items-center text-lg font-semibold text-red-700 mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -178,7 +173,6 @@
             </div>
         </div>
 
-        <!-- Self-Talk Section -->
         <div id="self-talk-section" class="section hidden">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold text-blue-800">Self-Talk Helper</h2>
@@ -210,7 +204,6 @@
             </div>
         </div>
 
-        <!-- Tiny Wins Section -->
         <div id="wins-section" class="section hidden">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold text-amber-800">Tiny Wins Tracker</h2>
@@ -260,21 +253,18 @@
                     </div>
                 </div>
                 <div id="wins-history" class="space-y-4 wins-scroll">
-                    <!-- Wins will be added here -->
                     <p class="text-gray-500 text-center py-4">Your tiny wins will appear here</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Back to Home Button -->
     <button id="back-to-home" class="back-btn bg-white p-3 rounded-full shadow-lg hidden">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-14 0l2 2m0 0l7 7 7-7m-14 0l2-2" />
         </svg>
     </button>
 
-    <!-- Add Custom Affirmation Modal -->
     <div id="add-affirmation-modal" class="modal">
         <div class="modal-content">
             <div class="flex justify-between items-center mb-4">
@@ -301,7 +291,6 @@
         </div>
     </div>
 
-    <!-- Edit Affirmation Modal -->
     <div id="edit-affirmation-modal" class="modal">
         <div class="modal-content">
             <div class="flex justify-between items-center mb-4">
