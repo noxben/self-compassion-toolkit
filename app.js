@@ -1,11 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Register service worker for PWA
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js').catch(function(error) {
-            console.log('Service worker registration failed:', error);
-        });
-    }
-
     // Initialize local storage
     if (!localStorage.getItem('bookmarkedAffirmations')) {
         localStorage.setItem('bookmarkedAffirmations', JSON.stringify([]));
@@ -598,40 +591,37 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             return;
         }
-        
+
         winsHistory.innerHTML = '';
-        wins.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(win => {
+        wins.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date, newest first
+
+        wins.forEach(win => {
             const winItem = document.createElement('div');
-            winItem.className = 'tiny-win-item bg-amber-50 rounded-lg p-4';
-            
-            const date = new Date(win.date);
-            const formattedDate = `${date.toLocaleDateString()}`;
-            
+            winItem.className = 'tiny-win-item bg-amber-50 p-4 rounded-lg flex justify-between items-start';
             winItem.innerHTML = `
-                <div class="flex justify-between items-center mb-2">
-                    <h4 class="font-semibold text-amber-900">${formattedDate}</h4>
-                    <button class="remove-win text-amber-400 hover:text-amber-600 p-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
+                <div>
+                    <p class="text-amber-900 font-medium mb-1">${win.date}</p>
+                    ${win.survived ? `<p class="text-amber-800 text-sm">Survived: ${win.survived}</p>` : ''}
+                    ${win.action ? `<p class="text-amber-800 text-sm">Action: ${win.action}</p>` : ''}
+                    ${win.selfcare ? `<p class="text-amber-800 text-sm">Self-care: ${win.selfcare}</p>` : ''}
                 </div>
-                <p class="text-amber-800 mb-1"><span class="font-medium">I survived:</span> ${win.survived}</p>
-                <p class="text-amber-800 mb-1"><span class="font-medium">I took action by:</span> ${win.action}</p>
-                <p class="text-amber-800"><span class="font-medium">Self-care:</span> ${win.selfcare}</p>
+                <button class="remove-win text-amber-600 hover:text-amber-800 p-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             `;
-            
+
             const removeBtn = winItem.querySelector('.remove-win');
             removeBtn.addEventListener('click', () => {
-                const updatedWins = JSON.parse(localStorage.getItem('tinyWins')).filter(item => item.date !== win.date);
+                const updatedWins = JSON.parse(localStorage.getItem('tinyWins')).filter(w => w.date !== win.date || w.survived !== win.survived); // Simple filter, unique enough for this app
                 localStorage.setItem('tinyWins', JSON.stringify(updatedWins));
                 renderTinyWins();
             });
-            
             winsHistory.appendChild(winItem);
         });
     }
-
+    
     tinyWinsForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
@@ -641,41 +631,26 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (survived || action || selfcare) {
             const wins = JSON.parse(localStorage.getItem('tinyWins'));
-            const today = new Date().toISOString().split('T')[0];
+            const newWin = {
+                date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+                survived,
+                action,
+                selfcare
+            };
             
-            // Check if there's already an entry for today
-            const todayIndex = wins.findIndex(win => win.date.startsWith(today));
-            
-            if (todayIndex !== -1) {
-                // Update today's entry
-                wins[todayIndex] = {
-                    date: today,
-                    survived: survived || wins[todayIndex].survived,
-                    action: action || wins[todayIndex].action,
-                    selfcare: selfcare || wins[todayIndex].selfcare
-                };
-            } else {
-                // Add new entry
-                wins.push({
-                    date: today,
-                    survived: survived || "—",
-                    action: action || "—",
-                    selfcare: selfcare || "—"
-                });
-            }
-            
+            wins.push(newWin);
             localStorage.setItem('tinyWins', JSON.stringify(wins));
             
-            // Clear form
             survivedInput.value = '';
             actionInput.value = '';
             selfcareInput.value = '';
             
             renderTinyWins();
+        } else {
+            alert('Please enter at least one tiny win for today!');
         }
     });
-    
-    // Wins filter functionality
+
     winsViewAll.addEventListener('click', () => {
         winsFilter = 'all';
         winsViewAll.classList.add('bg-amber-100', 'active-filter');
@@ -684,7 +659,7 @@ document.addEventListener('DOMContentLoaded', function() {
         winsViewWeek.classList.remove('bg-amber-100', 'active-filter');
         renderTinyWins();
     });
-    
+
     winsViewWeek.addEventListener('click', () => {
         winsFilter = 'week';
         winsViewWeek.classList.add('bg-amber-100', 'active-filter');
@@ -693,76 +668,37 @@ document.addEventListener('DOMContentLoaded', function() {
         winsViewAll.classList.remove('bg-amber-100', 'active-filter');
         renderTinyWins();
     });
-    
-    // Export wins functionality
+
     exportWinsBtn.addEventListener('click', () => {
         const wins = JSON.parse(localStorage.getItem('tinyWins'));
         if (wins.length === 0) {
             alert('No tiny wins to export.');
             return;
         }
-        
+
         let exportText = "My Tiny Wins Journal\n\n";
-        wins.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(win => {
-            const date = new Date(win.date);
-            const formattedDate = date.toLocaleDateString();
-            
-            exportText += `Date: ${formattedDate}\n`;
-            exportText += `I survived: ${win.survived}\n`;
-            exportText += `I took action by: ${win.action}\n`;
-            exportText += `Self-care: ${win.selfcare}\n\n`;
+        wins.forEach(win => {
+            exportText += `Date: ${win.date}\n`;
+            if (win.survived) exportText += `Survived: ${win.survived}\n`;
+            if (win.action) exportText += `Action: ${win.action}\n`;
+            if (win.selfcare) exportText += `Self-care: ${win.selfcare}\n`;
+            exportText += "\n";
         });
-        
+
         const blob = new Blob([exportText], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'my-tiny-wins.txt';
+        a.download = 'my-tiny-wins-journal.txt';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     });
-    
-    // Set up daily reminder notification (if browser supports it)
-    if ('Notification' in window) {
-        Notification.requestPermission().then(permission => {
-            if (permission === 'granted') {
-                // Check if we should show a notification (once per day)
-                const lastNotification = localStorage.getItem('lastNotification');
-                const today = new Date().toDateString();
-                
-                if (lastNotification !== today) {
-                    setTimeout(() => {
-                        new Notification('Self-Compassion Reminder', {
-                            body: "You've done enough today — be kind to yourself.",
-                            icon: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234c1d95"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'
-                        });
-                        localStorage.setItem('lastNotification', today);
-                    }, 10000); // Show after 10 seconds of using the app
-                }
-            }
-        });
-    }
-    
-    // Handle keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeAllModals();
-            if (document.getElementById('home-screen').classList.contains('hidden')) {
-                showHome();
-            }
-        }
-    });
-    
-    // Add touch feedback for mobile
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach(button => {
-        button.addEventListener('touchstart', () => {
-            button.style.transform = 'scale(0.95)';
-        });
-        button.addEventListener('touchend', () => {
-            button.style.transform = 'scale(1)';
-        });
-    });
+
+    // Initial load for affirmations and wins
+    const initialAffirmation = getRandomAffirmation();
+    displayAffirmation(initialAffirmation);
+    renderBookmarkedAffirmations();
+    renderTinyWins(); // Call renderTinyWins on initial load
 });
