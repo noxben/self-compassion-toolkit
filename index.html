@@ -1,318 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Self-Compassion Toolkit</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="app.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Compassion Toolkit | 自我关怀工具箱</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="description" content="A bilingual self-compassion toolkit with affirmations, control exercises, self-talk scripts, and a tiny wins tracker.">
+    <link rel="icon" href="images/icon-192.png">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <script src="app.js" defer></script>
 </head>
-<body>
-  <!-- Home Screen -->
-    <div id="home-screen" class="grid grid-cols-1 gap-4">
-        <button class="home-button bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl p-6 shadow-lg flex flex-col items-center justify-center" data-section="affirmations">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
-            <div class="text-xl font-bold">Affirmations</div>
-            <div class="text-sm chinese-text mt-1">正面肯定</div>
-        </button>
-        
-        <button class="home-button bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-xl p-6 shadow-lg flex flex-col items-center justify-center" data-section="control">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <div class="text-xl font-bold">What's in My Control</div>
-            <div class="text-sm chinese-text mt-1">我能控制的事情</div>
-        </button>
-        
-        <button class="home-button bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl p-6 shadow-lg flex flex-col items-center justify-center" data-section="self-talk">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-            </svg>
-            <div class="text-xl font-bold">Self-Talk Helper</div>
-            <div class="text-sm chinese-text mt-1">自我对话助手</div>
-        </button>
-        
-        <button class="home-button bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl p-6 shadow-lg flex flex-col items-center justify-center" data-section="wins">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-            </svg>
-            <div class="text-xl font-bold">Tiny Wins Tracker</div>
-            <div class="text-sm chinese-text mt-1">小小胜利记录</div>
-        </button>
-    </div>
+<body class="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-md">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-indigo-900">Self-Compassion Toolkit</h1>
+            <p class="text-indigo-700 mt-2 chinese-text">自我关怀工具箱</p>
+        </header>
 
-    <!-- Affirmations Section -->
-    <div id="affirmations-section" class="section hidden">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-indigo-900">Affirmations</h2>
-            <p class="text-indigo-700 chinese-text">正面肯定</p>
-        </div>
-        
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-            <h3 class="text-xl font-bold text-indigo-900 mb-4">Daily Affirmation</h3>
-            <p class="text-gray-500 mb-4">Tap the button to receive a bilingual affirmation</p>
+        <!-- Home Screen -->
+        <div id="home-screen" class="grid grid-cols-1 gap-4">
+            <button class="home-button bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl p-6 shadow-lg flex flex-col items-center justify-center" data-section="affirmations">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                <div class="text-xl font-bold">Affirmations</div>
+                <div class="text-sm chinese-text mt-1">正面肯定</div>
+            </button>
             
-            <div id="affirmation-display" class="bg-gradient-to-r from-indigo-100 to-purple-100 rounded-lg p-5 mb-4 min-h-[150px] flex items-center justify-center">
-                <p class="text-center text-indigo-800 text-lg">Tap the button below to see your affirmation</p>
+            <button class="home-button bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-xl p-6 shadow-lg flex flex-col items-center justify-center" data-section="control">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div class="text-xl font-bold">What's in My Control</div>
+                <div class="text-sm chinese-text mt-1">我能控制的事情</div>
+            </button>
+            
+            <button class="home-button bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl p-6 shadow-lg flex flex-col items-center justify-center" data-section="self-talk">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
+                <div class="text-xl font-bold">Self-Talk Helper</div>
+                <div class="text-sm chinese-text mt-1">自我对话助手</div>
+            </button>
+            
+            <button class="home-button bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl p-6 shadow-lg flex flex-col items-center justify-center" data-section="wins">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+                <div class="text-xl font-bold">Tiny Wins Tracker</div>
+                <div class="text-sm chinese-text mt-1">小小胜利记录</div>
+            </button>
+        </div>
+
+        <!-- Affirmations Section -->
+        <div id="affirmations-section" class="section hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-indigo-900">Affirmations</h2>
+                <p class="text-indigo-700 chinese-text">正面肯定</p>
             </div>
             
-            <div class="flex space-x-2">
-                <button id="new-affirmation-btn" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-4 rounded-lg transition duration-300 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                    New Affirmation
-                </button>
-                <button id="add-affirmation-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-4 rounded-lg transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                </button>
-                <button id="export-affirmations-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-4 rounded-lg transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-        
-        <div class="bg-white rounded-lg shadow-lg p-6">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-indigo-900">Bookmarked Affirmations</h3>
-                <div class="flex space-x-1">
-                    <button id="filter-all-btn" class="bg-indigo-100 hover:bg-indigo-200 text-indigo-800 px-3 py-1 rounded-md text-sm font-medium active-filter">All</button>
-                    <button id="filter-custom-btn" class="bg-indigo-50 hover:bg-indigo-200 text-indigo-800 px-3 py-1 rounded-md text-sm font-medium">Custom</button>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-indigo-900 mb-4">Daily Affirmation</h3>
+                <p class="text-gray-500 mb-4">Tap the button to receive a bilingual affirmation</p>
+                
+                <div id="affirmation-display" class="bg-gradient-to-r from-indigo-100 to-purple-100 rounded-lg p-5 mb-4 min-h-[150px] flex items-center justify-center">
+                    <p class="text-center text-indigo-800 text-lg">Tap the button below to see your affirmation</p>
+                </div>
+                
+                <div class="flex space-x-2">
+                    <button id="new-affirmation-btn" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                        New Affirmation
+                    </button>
+                    <button id="add-affirmation-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-4 rounded-lg transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                    </button>
+                    <button id="export-affirmations-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-4 rounded-lg transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                    </button>
                 </div>
             </div>
-            <div id="bookmarked-affirmations" class="space-y-3">
-                <p class="text-gray-500 text-center py-4">Your bookmarked affirmations will appear here</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Control Section -->
-    <div id="control-section" class="section hidden">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-green-800">What's in My Control</h2>
-            <p class="text-green-700 chinese-text">我能控制的事情</p>
-        </div>
-        
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-green-800">Control Exercise</h3>
-                <button id="export-control-btn" class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-lg transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
-                </button>
-            </div>
-            <p class="text-gray-500 mb-4">Identify what you can and cannot control</p>
             
-            <div class="grid grid-cols-1 gap-6">
-                <!-- In My Control Column -->
-                <div>
-                    <h4 class="flex items-center text-lg font-semibold text-green-700 mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        In My Control
-                    </h4>
-                    <ul id="in-control-list" class="space-y-2 mb-4 max-h-[200px] overflow-y-auto pr-1">
-                        <li class="flex items-center bg-green-50 p-3 rounded-md">
-                            <span class="text-green-800">My responses to situations</span>
-                        </li>
-                        <li class="flex items-center bg-green-50 p-3 rounded-md">
-                            <span class="text-green-800">How I spend my time</span>
-                        </li>
-                        <li class="flex items-center bg-green-50 p-3 rounded-md">
-                            <span class="text-green-800">My self-care practices</span>
-                        </li>
-                    </ul>
-                    <div class="flex">
-                        <input type="text" id="in-control-input" placeholder="Add new item..." class="flex-grow border border-gray-300 rounded-l-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-green-500">
-                        <button id="add-in-control-btn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-r-md">Add</button>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-indigo-900">Bookmarked Affirmations</h3>
+                    <div class="flex space-x-1">
+                        <button id="filter-all-btn" class="bg-indigo-100 hover:bg-indigo-200 text-indigo-800 px-3 py-1 rounded-md text-sm font-medium active-filter">All</button>
+                        <button id="filter-custom-btn" class="bg-indigo-50 hover:bg-indigo-200 text-indigo-800 px-3 py-1 rounded-md text-sm font-medium">Custom</button>
                     </div>
                 </div>
-                
-                <!-- Not In My Control Column -->
-                <div>
-                    <h4 class="flex items-center text-lg font-semibold text-red-700 mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                <div id="bookmarked-affirmations" class="space-y-3">
+                    <p class="text-gray-500 text-center py-4">Your bookmarked affirmations will appear here</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Section -->
+        <div id="control-section" class="section hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-green-800">What's in My Control</h2>
+                <p class="text-green-700 chinese-text">我能控制的事情</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-green-800">Control Exercise</h3>
+                    <button id="export-control-btn" class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-lg transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
-                        Not In My Control
-                    </h4>
-                    <ul id="not-control-list" class="space-y-2 mb-4 max-h-[200px] overflow-y-auto pr-1">
-                        <li class="flex items-center bg-red-50 p-3 rounded-md">
-                            <span class="text-red-800">Other people's actions</span>
-                        </li>
-                        <li class="flex items-center bg-red-50 p-3 rounded-md">
-                            <span class="text-red-800">Past events</span>
-                        </li>
-                        <li class="flex items-center bg-red-50 p-3 rounded-md">
-                            <span class="text-red-800">Global circumstances</span>
-                        </li>
-                    </ul>
-                    <div class="flex">
-                        <input type="text" id="not-control-input" placeholder="Add new item..." class="flex-grow border border-gray-300 rounded-l-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-red-500">
-                        <button id="add-not-control-btn" class="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded-r-md">Add</button>
+                    </button>
+                </div>
+                <p class="text-gray-500 mb-4">Identify what you can and cannot control</p>
+                
+                <div class="grid grid-cols-1 gap-6">
+                    <!-- In My Control Column -->
+                    <div>
+                        <h4 class="flex items-center text-lg font-semibold text-green-700 mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            In My Control
+                        </h4>
+                        <ul id="in-control-list" class="space-y-2 mb-4 max-h-[200px] overflow-y-auto pr-1">
+                            <li class="flex items-center bg-green-50 p-3 rounded-md">
+                                <span class="text-green-800">My responses to situations</span>
+                            </li>
+                            <li class="flex items-center bg-green-50 p-3 rounded-md">
+                                <span class="text-green-800">How I spend my time</span>
+                            </li>
+                            <li class="flex items-center bg-green-50 p-3 rounded-md">
+                                <span class="text-green-800">My self-care practices</span>
+                            </li>
+                        </ul>
+                        <div class="flex">
+                            <input type="text" id="in-control-input" placeholder="Add new item..." class="flex-grow border border-gray-300 rounded-l-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <button id="add-in-control-btn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-r-md">Add</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Not In My Control Column -->
+                    <div>
+                        <h4 class="flex items-center text-lg font-semibold text-red-700 mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                            Not In My Control
+                        </h4>
+                        <ul id="not-control-list" class="space-y-2 mb-4 max-h-[200px] overflow-y-auto pr-1">
+                            <li class="flex items-center bg-red-50 p-3 rounded-md">
+                                <span class="text-red-800">Other people's actions</span>
+                            </li>
+                            <li class="flex items-center bg-red-50 p-3 rounded-md">
+                                <span class="text-red-800">Past events</span>
+                            </li>
+                            <li class="flex items-center bg-red-50 p-3 rounded-md">
+                                <span class="text-red-800">Global circumstances</span>
+                            </li>
+                        </ul>
+                        <div class="flex">
+                            <input type="text" id="not-control-input" placeholder="Add new item..." class="flex-grow border border-gray-300 rounded-l-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-red-500">
+                            <button id="add-not-control-btn" class="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded-r-md">Add</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Self-Talk Section -->
-    <div id="self-talk-section" class="section hidden">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-blue-800">Self-Talk Helper</h2>
-            <p class="text-blue-700 chinese-text">自我对话助手</p>
-        </div>
-        
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-            <h3 class="text-xl font-bold text-blue-800 mb-4">Calming Scripts</h3>
-            <p class="text-gray-500 mb-4">Tap a button to see a calming self-talk script</p>
-            
-            <div id="self-talk-display" class="bg-gradient-to-r from-blue-100 to-green-100 rounded-lg p-5 mb-4 min-h-[200px]">
-                <p class="text-center text-teal-800 text-lg">Tap a button below to see a self-talk script</p>
+        <!-- Self-Talk Section -->
+        <div id="self-talk-section" class="section hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-blue-800">Self-Talk Helper</h2>
+                <p class="text-blue-700 chinese-text">自我对话助手</p>
             </div>
             
-            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <button class="self-talk-btn bg-teal-600 hover:bg-teal-700 text-white font-medium py-4 px-4 rounded-lg transition duration-300" data-id="0">
-                    Feeling Overwhelmed
-                </button>
-                <button class="self-talk-btn bg-teal-600 hover:bg-teal-700 text-white font-medium py-4 px-4 rounded-lg transition duration-300" data-id="1">
-                    Feeling Anxious
-                </button>
-                <button class="self-talk-btn bg-teal-600 hover:bg-teal-700 text-white font-medium py-4 px-4 rounded-lg transition duration-300" data-id="2">
-                    Feeling Inadequate
-                </button>
-                <button class="self-talk-btn bg-teal-600 hover:bg-teal-700 text-white font-medium py-4 px-4 rounded-lg transition duration-300" data-id="3">
-                    Feeling Stuck
-                </button>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-blue-800 mb-4">Calming Scripts</h3>
+                <p class="text-gray-500 mb-4">Tap a button to see a calming self-talk script</p>
+                
+                <div id="self-talk-display" class="bg-gradient-to-r from-blue-100 to-green-100 rounded-lg p-5 mb-4 min-h-[200px]">
+                    <p class="text-center text-teal-800 text-lg">Tap a button below to see a self-talk script</p>
+                </div>
+                
+                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    <button class="self-talk-btn bg-teal-600 hover:bg-teal-700 text-white font-medium py-4 px-4 rounded-lg transition duration-300" data-id="0">
+                        Feeling Overwhelmed
+                    </button>
+                    <button class="self-talk-btn bg-teal-600 hover:bg-teal-700 text-white font-medium py-4 px-4 rounded-lg transition duration-300" data-id="1">
+                        Feeling Anxious
+                    </button>
+                    <button class="self-talk-btn bg-teal-600 hover:bg-teal-700 text-white font-medium py-4 px-4 rounded-lg transition duration-300" data-id="2">
+                        Feeling Inadequate
+                    </button>
+                    <button class="self-talk-btn bg-teal-600 hover:bg-teal-700 text-white font-medium py-4 px-4 rounded-lg transition duration-300" data-id="3">
+                        Feeling Stuck
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tiny Wins Section -->
+        <div id="wins-section" class="section hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-amber-800">Tiny Wins Tracker</h2>
+                <p class="text-amber-700 chinese-text">小小胜利记录</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-amber-800">Daily Progress</h3>
+                    <button id="export-wins-btn" class="bg-amber-600 hover:bg-amber-700 text-white p-2 rounded-lg transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                    </button>
+                </div>
+                <p class="text-gray-500 mb-4">Celebrate your small victories each day</p>
+                
+                <form id="tiny-wins-form" class="space-y-4 mb-6">
+                    <div>
+                        <label class="block text-amber-800 font-medium mb-2">Something I survived today:</label>
+                        <input type="text" id="survived-input" class="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="I survived...">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-amber-800 font-medium mb-2">One small action I took:</label>
+                        <input type="text" id="action-input" class="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="I took action by...">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-amber-800 font-medium mb-2">One self-care moment:</label>
+                        <input type="text" id="selfcare-input" class="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="I cared for myself by...">
+                    </div>
+                    
+                    <button type="submit" id="save-wins-btn" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                        </svg>
+                        Save Today's Wins
+                    </button>
+                </form>
+                
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-lg font-semibold text-amber-800">Your Progress Journal</h3>
+                    <div class="flex space-x-1">
+                        <button id="wins-view-all" class="bg-amber-100 hover:bg-amber-200 text-amber-800 px-3 py-1 rounded-md text-sm font-medium active-filter">All</button>
+                        <button id="wins-view-week" class="bg-amber-50 hover:bg-amber-200 text-amber-800 px-3 py-1 rounded-md text-sm font-medium">This Week</button>
+                    </div>
+                </div>
+                <div id="wins-history" class="space-y-4 wins-scroll">
+                    <!-- Wins will be added here -->
+                    <p class="text-gray-500 text-center py-4">Your tiny wins will appear here</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Tiny Wins Section -->
-    <div id="wins-section" class="section hidden">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-amber-800">Tiny Wins Tracker</h2>
-            <p class="text-amber-700 chinese-text">小小胜利记录</p>
-        </div>
-        
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+    <!-- Back to Home Button -->
+    <button id="back-to-home" class="back-btn bg-white p-3 rounded-full shadow-lg hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-14 0l2 2m0 0l7 7 7-7m-14 0l2-2" />
+        </svg>
+    </button>
+
+    <!-- Add Custom Affirmation Modal -->
+    <div id="add-affirmation-modal" class="modal">
+        <div class="modal-content">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-amber-800">Daily Progress</h3>
-                <button id="export-wins-btn" class="bg-amber-600 hover:bg-amber-700 text-white p-2 rounded-lg transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                <h3 class="text-xl font-bold text-indigo-900">Add Custom Affirmation</h3>
+                <button class="close-modal text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
-            <p class="text-gray-500 mb-4">Celebrate your small victories each day</p>
-            
-            <form id="tiny-wins-form" class="space-y-4 mb-6">
+            <form id="add-affirmation-form" class="space-y-4">
                 <div>
-                    <label class="block text-amber-800 font-medium mb-2">Something I survived today:</label>
-                    <input type="text" id="survived-input" class="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="I survived...">
+                    <label class="block text-indigo-800 font-medium mb-2">English Affirmation:</label>
+                    <textarea id="new-affirmation-en" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" rows="3" placeholder="Enter your affirmation in English..."></textarea>
                 </div>
-                
                 <div>
-                    <label class="block text-amber-800 font-medium mb-2">One small action I took:</label>
-                    <input type="text" id="action-input" class="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="I took action by...">
+                    <label class="block text-indigo-800 font-medium mb-2">Mandarin Translation (optional):</label>
+                    <textarea id="new-affirmation-zh" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 chinese-text" rows="3" placeholder="Enter Mandarin translation if available..."></textarea>
                 </div>
-                
-                <div>
-                    <label class="block text-amber-800 font-medium mb-2">One self-care moment:</label>
-                    <input type="text" id="selfcare-input" class="w-full border border-gray-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="I cared for myself by...">
-                </div>
-                
-                <button type="submit" id="save-wins-btn" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 px-4 rounded-lg transition duration-300 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
-                    </svg>
-                    Save Today's Wins
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">
+                    Save Affirmation
                 </button>
             </form>
-            
-            <div class="flex justify-between items-center mb-3">
-                <h3 class="text-lg font-semibold text-amber-800">Your Progress Journal</h3>
-                <div class="flex space-x-1">
-                    <button id="wins-view-all" class="bg-amber-100 hover:bg-amber-200 text-amber-800 px-3 py-1 rounded-md text-sm font-medium active-filter">All</button>
-                    <button id="wins-view-week" class="bg-amber-50 hover:bg-amber-200 text-amber-800 px-3 py-1 rounded-md text-sm font-medium">This Week</button>
+        </div>
+    </div>
+
+    <!-- Edit Affirmation Modal -->
+    <div id="edit-affirmation-modal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-indigo-900">Edit Affirmation</h3>
+                <button class="close-modal text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <form id="edit-affirmation-form" class="space-y-4">
+                <input type="hidden" id="edit-affirmation-id">
+                <div>
+                    <label class="block text-indigo-800 font-medium mb-2">English Affirmation:</label>
+                    <textarea id="edit-affirmation-en" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" rows="3"></textarea>
                 </div>
-            </div>
-            <div id="wins-history" class="space-y-4 wins-scroll">
-                <!-- Wins will be added here -->
-                <p class="text-gray-500 text-center py-4">Your tiny wins will appear here</p>
-            </div>
+                <div>
+                    <label class="block text-indigo-800 font-medium mb-2">Mandarin Translation:</label>
+                    <textarea id="edit-affirmation-zh" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 chinese-text" rows="3"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">
+                    Update Affirmation
+                </button>
+            </form>
         </div>
     </div>
-</div>
 
-<!-- Back to Home Button -->
-<button id="back-to-home" class="back-btn bg-white p-3 rounded-full shadow-lg hidden">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-14 0l2 2m0 0l7 7 7-7m-14 0l2-2" />
-    </svg>
-</button>
-
-<!-- Add Custom Affirmation Modal -->
-<div id="add-affirmation-modal" class="modal">
-    <div class="modal-content">
-        <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-indigo-900">Add Custom Affirmation</h3>
-            <button class="close-modal text-gray-500 hover:text-gray-700">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-        <form id="add-affirmation-form" class="space-y-4">
-            <div>
-                <label class="block text-indigo-800 font-medium mb-2">English Affirmation:</label>
-                <textarea id="new-affirmation-en" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" rows="3" placeholder="Enter your affirmation in English..."></textarea>
-            </div>
-            <div>
-                <label class="block text-indigo-800 font-medium mb-2">Mandarin Translation (optional):</label>
-                <textarea id="new-affirmation-zh" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 chinese-text" rows="3" placeholder="Enter Mandarin translation if available..."></textarea>
-            </div>
-            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">
-                Save Affirmation
-            </button>
-        </form>
-    </div>
-</div>
-
-<!-- Edit Affirmation Modal -->
-<div id="edit-affirmation-modal" class="modal">
-    <div class="modal-content">
-        <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-indigo-900">Edit Affirmation</h3>
-            <button class="close-modal text-gray-500 hover:text-gray-700">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-        <form id="edit-affirmation-form" class="space-y-4">
-            <input type="hidden" id="edit-affirmation-id">
-            <div>
-                <label class="block text-indigo-800 font-medium mb-2">English Affirmation:</label>
-                <textarea id="edit-affirmation-en" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" rows="3"></textarea>
-            </div>
-            <div>
-                <label class="block text-indigo-800 font-medium mb-2">Mandarin Translation:</label>
-                <textarea id="edit-affirmation-zh" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 chinese-text" rows="3"></textarea>
-            </div>
-            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">
-                Update Affirmation
-            </button>
-        </form>
-    </div>
-</div>
+    <script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>
